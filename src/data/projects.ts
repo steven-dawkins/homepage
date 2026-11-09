@@ -2,6 +2,30 @@ import type { Project } from '../types/project'
 
 export const projects: Project[] = [
   {
+    title: 'Marathon Training Dashboard',
+    year: 2026,
+    summary:
+      'A data pipeline and public dashboard that turns years of Apple Health exports into a personalised marathon training plan and shows progress against it.',
+    details: [
+      'Apple Health exports are multi-gigabyte XML files, and I delete old data from my phone to free space, so no single export holds my full history. I wrote a streaming extractor that reads several overlapping exports in place, dedupes samples across them with the newest export winning, and writes one clean CSV per metric.',
+      'A summary step turns those into per-run, weekly and recovery statistics, and a plan generator produces a 25-week day-by-day schedule that is kept consistent with the weekly volume targets. I also matched parkrun results against watch workouts to use them as fitness markers.',
+      'The dashboard is a single hand-written HTML, SVG and JavaScript page with no external libraries. It has tabs for overview, recovery, fitness, the plan and runs, a table view for every chart, and light and dark themes. Because the repo is public, the build uses a strict privacy allowlist so only aggregates and basic per-run figures are published, never routes, locations or raw samples.',
+    ],
+    highlights: [
+      'Streams and dedupes 1–2 GB Apple Health XML exports across overlapping files',
+      'Pandas summaries for training load, recovery trends and aerobic efficiency',
+      'Generated 25-week training plan and day-by-day schedule',
+      'Dependency-free interactive dashboard with accessible charts and tab navigation',
+      'Privacy-filtered build so personal data stays out of the public site',
+      'Published to GitHub Pages from the repo’s docs folder',
+    ],
+    tags: ['Python', 'pandas', 'HTML', 'SVG', 'JavaScript', 'Data visualisation', 'GitHub Pages'],
+    links: [
+      { label: 'Live dashboard', url: 'https://steven-dawkins.github.io/health' },
+      { label: 'Source on GitHub', url: 'https://github.com/steven-dawkins/health' },
+    ],
+  },
+  {
     title: 'Abingdon Marathon 2026 Photo Finder',
     year: 2026,
     summary:
