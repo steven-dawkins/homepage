@@ -19,7 +19,7 @@ npm install        # install deps
 npm run dev        # Vite dev server
 npm run build      # type-check (tsc -b) + production build to dist/
 npm run preview    # serve the production build locally
-npm run lint       # ESLint
+npm run lint       # oxlint
 npm run typecheck  # tsc --noEmit
 ```
 
@@ -30,10 +30,12 @@ Run `npm run lint` and `npm run build` before considering a change done.
 ```
 src/
   components/   # reusable UI components
-  sections/     # page sections (Hero, About, Projects, Experience, Contact)
+  sections/     # sections of the home page (Hero, Projects, ...)
+  pages/        # full pages: ProjectPage (/projects/<slug>), NotFoundPage
   data/         # typed content: projects.ts, experience.ts, profile.ts
   types/        # shared TypeScript interfaces (Project, Experience, ...)
   assets/       # images, icons
+  navigation.ts # tiny History API router (usePathname, navigate); use components/Link for internal links
 public/         # static files copied as-is (favicon, robots.txt, staticwebapp.config.json)
 .github/workflows/  # Azure Static Web Apps deploy workflow
 ```
@@ -41,8 +43,9 @@ public/         # static files copied as-is (favicon, robots.txt, staticwebapp.c
 ## Content
 
 - All CV and project content lives in typed files under `src/data/`. To add a project, add an entry to `src/data/projects.ts`; do not hardcode content inside components.
-- Define data shapes in `src/types/` (e.g. `Project`: title, summary, tags, repoUrl, liveUrl, image, year).
+- Define data shapes in `src/types/` (e.g. `Project`: title, summary, tags, repoUrl, liveUrl, image).
 - Keep copy concise and factual; this is a professional-facing page.
+- The home page shows a short summary card per project; the full write-up (details, highlights, images, links) is on its detail page at `/projects/<slug>`. Each project needs a unique `slug`. Routing is a small built-in History API router (no react-router); it relies on the `navigationFallback` in `staticwebapp.config.json`.
 
 ## Conventions
 

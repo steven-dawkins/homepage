@@ -1,54 +1,63 @@
 import type { Project } from '../types/project'
+import { Link } from './Link'
 
-const primaryLink =
-  'rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
-const secondaryLink =
-  'rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:border-slate-600 dark:hover:bg-slate-800'
+const MAX_TAGS = 4
 
+/** Short summary card for the project list; the full write-up is on the detail page. */
 export function ProjectCard({ project }: { project: Project }) {
+  const tags = project.tags.slice(0, MAX_TAGS)
+  const hiddenTags = project.tags.length - tags.length
+  const detailPath = `/projects/${project.slug}`
+
   return (
-    <article className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-      <header className="flex flex-wrap items-baseline justify-between gap-2">
-        <h3 className="text-xl font-semibold">{project.title}</h3>
-        <span className="text-sm text-slate-500 dark:text-slate-400">{project.year}</span>
-      </header>
-      <p className="mt-2 text-slate-700 dark:text-slate-300">{project.summary}</p>
+    <article className="flex gap-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900">
+      {project.thumbnail && (
+        // Decorative duplicate of the title link, so hidden from keyboard and screen readers.
+        <Link to={detailPath} aria-hidden={true} tabIndex={-1} className="shrink-0 self-start">
+          <img
+            src={project.thumbnail.src}
+            alt=""
+            width={112}
+            height={112}
+            loading="lazy"
+            decoding="async"
+            className="size-20 rounded-lg border border-slate-200 object-cover sm:size-28 dark:border-slate-700"
+          />
+        </Link>
+      )}
 
-      <ul className="mt-4 flex flex-wrap gap-2" aria-label="Technologies">
-        {project.tags.map((tag) => (
-          <li
-            key={tag}
-            className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300"
+      <div className="min-w-0 flex-1">
+        <h3 className="text-lg font-semibold">
+          <Link
+            to={detailPath}
+            className="hover:text-indigo-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:hover:text-indigo-400"
           >
-            {tag}
-          </li>
-        ))}
-      </ul>
+            {project.title}
+          </Link>
+        </h3>
+        <p className="mt-2 text-slate-700 dark:text-slate-300">{project.summary}</p>
 
-      <div className="mt-4 space-y-3 text-slate-700 dark:text-slate-300">
-        {project.details.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
-        ))}
-      </div>
+        <ul className="mt-3 flex flex-wrap gap-2" aria-label="Technologies">
+          {tags.map((tag) => (
+            <li
+              key={tag}
+              className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300"
+            >
+              {tag}
+            </li>
+          ))}
+          {hiddenTags > 0 && (
+            <li className="px-1 py-1 text-xs text-slate-500 dark:text-slate-400">+{hiddenTags} more</li>
+          )}
+        </ul>
 
-      <ul className="mt-4 list-disc space-y-1 pl-5 text-slate-700 dark:text-slate-300">
-        {project.highlights.map((h) => (
-          <li key={h}>{h}</li>
-        ))}
-      </ul>
-
-      <div className="mt-6 flex flex-wrap gap-3">
-        {project.links.map((link, i) => (
-          <a
-            key={link.url}
-            href={link.url}
-            target="_blank"
-            rel="noreferrer"
-            className={i === 0 ? primaryLink : secondaryLink}
-          >
-            {link.label}
-          </a>
-        ))}
+        <Link
+          to={detailPath}
+          aria-label={`View details: ${project.title}`}
+          className="mt-4 inline-block text-sm font-medium text-indigo-700 underline underline-offset-2 hover:text-indigo-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-300"
+        >
+          View details →
+        </Link>
       </div>
     </article>
   )
