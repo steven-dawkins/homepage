@@ -64,7 +64,7 @@ public/         # static files copied as-is (favicon, robots.txt, staticwebapp.c
 - Workflow settings: the workflow builds the app itself (`npm run build`), then uploads the finished output with `app_location: dist` and `skip_app_build: true` (no `output_location`); no API (`api_location` empty). Pointing `app_location` at the repo root would publish the unbuilt source.
 - Deployment token is stored as the GitHub secret `AZURE_STATIC_WEB_APPS_API_TOKEN`. Never commit it.
 - `public/staticwebapp.config.json` must include a `navigationFallback` to `/index.html` (rewrite) so client-side routes work, excluding asset paths (`/assets/*`, images, etc.).
-- If the site uses a custom domain, configure it in the Azure portal; SSL is managed by Azure.
+- Custom domains: `steven.dawkins.dynv6.net` (primary) and `www.stevendawkins.dynv6.net`, both CNAMEs on dynv6 to the app's default `*.azurestaticapps.net` hostname, bound with CNAME validation; SSL is managed by Azure. dynv6 CNAME targets need a trailing `.`, or dynv6 appends the zone name. The web form always appends the zone, so set them through the dynv6 REST API. The zone apex can't be used: there's no CNAME/ALIAS at the apex and the app has no stable IP.
 
 ## Rules for Claude
 

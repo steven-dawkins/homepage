@@ -10,7 +10,7 @@ export function ProjectCard({ project }: { project: Project }) {
   const detailPath = `/projects/${project.slug}`
 
   return (
-    <article className="flex gap-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900">
+    <article className="flex gap-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-indigo-300 hover:shadow-md dark:border-slate-700 dark:bg-slate-900 dark:hover:border-indigo-700">
       {project.thumbnail && (
         // Decorative duplicate of the title link, so hidden from keyboard and screen readers.
         <Link to={detailPath} aria-hidden={true} tabIndex={-1} className="shrink-0 self-start">
