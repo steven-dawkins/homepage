@@ -61,7 +61,7 @@ public/         # static files copied as-is (favicon, robots.txt, staticwebapp.c
 ## Deployment (Azure Static Web Apps)
 
 - Deployed by GitHub Actions on push to `main`; PRs get preview environments.
-- Workflow settings: `app_location: "/"`, `output_location: "dist"`, no API (`api_location` empty).
+- Workflow settings: the workflow builds the app itself (`npm run build`), then uploads the finished output with `app_location: dist` and `skip_app_build: true` (no `output_location`); no API (`api_location` empty). Pointing `app_location` at the repo root would publish the unbuilt source.
 - Deployment token is stored as the GitHub secret `AZURE_STATIC_WEB_APPS_API_TOKEN`. Never commit it.
 - `public/staticwebapp.config.json` must include a `navigationFallback` to `/index.html` (rewrite) so client-side routes work, excluding asset paths (`/assets/*`, images, etc.).
 - If the site uses a custom domain, configure it in the Azure portal; SSL is managed by Azure.
