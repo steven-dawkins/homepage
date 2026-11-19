@@ -1,6 +1,8 @@
 import healthThumb from '../assets/thumbs/health.webp'
 import lily58Thumb from '../assets/thumbs/lily58.webp'
 import marathonPhotosThumb from '../assets/thumbs/marathon-photos.webp'
+import starflightThumb from '../assets/thumbs/starflight.webp'
+import starflightOrbit from '../assets/starflight/starflight-orbit.webp'
 import lily58Finished from '../assets/lily58/lily58-finished.webp'
 import lily58Matrix from '../assets/lily58/lily58-matrix.webp'
 import type { Project } from '../types/project'
@@ -80,6 +82,40 @@ export const projects: Project[] = [
         url: 'https://www.printables.com/model/1321348-handwired-lily58',
       },
     ],
+  },
+  {
+    slug: 'starflight-typescript-port',
+    thumbnail: {
+      src: starflightThumb,
+      alt: 'The player’s ship near a ring-shaped space station, from the browser port.',
+    },
+    images: [
+      {
+        src: starflightOrbit,
+        alt: 'Game screen from the browser port: the player’s ship firing its engines beside a ring-shaped space station, with fuel, shield, armour and damage gauges along the top, a star system map in the top right, an “Orbit established” message and a cargo bar along the bottom.',
+        caption: 'The TypeScript port running in the browser: the ship in orbit beside a space station.',
+        wide: true,
+      },
+    ],
+    title: 'Starflight in TypeScript, Ported with Agentic AI',
+    summary:
+      'Using Claude Code agents to port the classic Starflight, in its 1991 Sega Mega Drive version, to readable TypeScript that runs in the browser, verified against the binary from the original ROM.',
+    details: [
+      'Starflight is a classic space exploration and trading game from 1986, ported to the Sega Mega Drive by Electronic Arts in 1991. This project rebuilds the Mega Drive version as a TypeScript game that runs in a web browser. The aim is to match the original exactly while reading like a hand-written TypeScript game, not an emulator or a machine translation.',
+      'Nearly all of the code is written by Claude agents, with me directing the work. The main Claude Code session plans each piece, hands research, ports and test runs to subagents, and reviews their changes before each commit. Project instructions set the rules the agents work to: one subsystem at a time, every ported routine tagged with its original ROM address, and a shared knowledge base of named functions, memory variables and data layouts that all the tooling is generated from.',
+      'Being faithful is verified, not assumed. The original 68000 machine code is run straight from the ROM binary on an emulator as a test oracle, and each TypeScript routine must reproduce its output exactly. Differential tests replay recorded inputs and compare the port against the ROM, and the original game’s bugs are kept and documented rather than quietly fixed.',
+      'The repository contains no game code or assets. Everything is read at runtime from a ROM the player supplies. The source is kept private for now, so there is no public link.',
+    ],
+    highlights: [
+      'Custom 68000 disassembler and control-flow tracer to map the ROM into code and data',
+      'Starport, space travel, encounters, combat and planet surfaces running in the browser',
+      'Browser versions of the Mega Drive graphics, input and sound hardware',
+      '130 emulator oracle scripts verifying ported routines against the original ROM binary',
+      'About 36,000 lines of strict TypeScript with around 180 test files',
+      'Agent workflow in Claude Code: a planning session that delegates ports to subagents and reviews every commit',
+    ],
+    tags: ['TypeScript', 'Claude Code', 'Agentic AI', 'Reverse engineering', '68000', 'Vite', 'Vitest'],
+    links: [],
   },
   {
     slug: 'marathon-training-dashboard',

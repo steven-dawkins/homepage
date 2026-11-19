@@ -68,13 +68,13 @@ export function ProjectPage({ project }: { project: Project }) {
         {project.images && project.images.length > 0 && (
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
             {project.images.map((image) => (
-              <figure key={image.src}>
+              <figure key={image.src} className={image.wide ? 'sm:col-span-2' : undefined}>
                 <img
                   src={image.src}
                   alt={image.alt}
                   loading="lazy"
                   decoding="async"
-                  className="aspect-[3/4] w-full rounded-lg border border-slate-200 object-cover dark:border-slate-700"
+                  className={`w-full rounded-lg border border-slate-200 dark:border-slate-700 ${image.wide ? 'h-auto' : 'aspect-[3/4] object-cover'}`}
                 />
                 {image.caption && (
                   <figcaption className="mt-2 text-sm text-slate-500 dark:text-slate-400">

@@ -4,7 +4,7 @@ export const workHighlights: WorkHighlight[] = [
   {
     title: 'Data Services platform',
     summary:
-      'Led the architecture and development of Oxford Economics’ next-generation data platform, which replaced the legacy data API and feed delivery and became the foundation for the company’s data and charting products.',
+      'Led the architecture and development of a next-generation data platform, which replaced the legacy data API and feed delivery and became the foundation for the company’s data and charting products.',
     tags: ['.NET', 'Azure Functions', 'ClickHouse', 'Redis'],
   },
   {

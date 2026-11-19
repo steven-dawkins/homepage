@@ -7,6 +7,8 @@ export interface ProjectImage {
   src: string
   alt: string
   caption?: string
+  /** Wide images span the full width at their natural aspect ratio; the default is a 3:4 portrait tile. */
+  wide?: boolean
 }
 
 export interface Project {

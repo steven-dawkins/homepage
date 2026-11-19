@@ -5,8 +5,6 @@ import { NotFoundPage } from './pages/NotFoundPage'
 import { ProjectPage } from './pages/ProjectPage'
 import { Hero } from './sections/Hero'
 import { Projects } from './sections/Projects'
-import { Work } from './sections/Work'
-
 const CURRENT_YEAR = new Date().getFullYear()
 
 function Routes() {
@@ -18,7 +16,6 @@ function Routes() {
         <Hero />
         <main>
           <Projects />
-          <Work />
         </main>
         <footer className="border-t border-slate-200 py-8 text-center text-sm text-slate-500 dark:border-slate-800 dark:text-slate-400">
           © {CURRENT_YEAR} {profile.name}
