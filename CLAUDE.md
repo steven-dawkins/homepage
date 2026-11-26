@@ -66,6 +66,11 @@ public/         # static files copied as-is (favicon, robots.txt, staticwebapp.c
 - `public/staticwebapp.config.json` must include a `navigationFallback` to `/index.html` (rewrite) so client-side routes work, excluding asset paths (`/assets/*`, images, etc.).
 - Custom domains: `steven.dawkins.dynv6.net` (primary) and `www.stevendawkins.dynv6.net`, both CNAMEs on dynv6 to the app's default `*.azurestaticapps.net` hostname, bound with CNAME validation; SSL is managed by Azure. dynv6 CNAME targets need a trailing `.`, or dynv6 appends the zone name. The web form always appends the zone, so set them through the dynv6 REST API. The zone apex can't be used: there's no CNAME/ALIAS at the apex and the app has no stable IP.
 
+## Deployment (GitHub Pages)
+
+- Also published as the GitHub user site `https://steven-dawkins.github.io/` via `.github/workflows/github-pages.yml` (Pages source: GitHub Actions). This only works when the repo is named `steven-dawkins.github.io`; the job is skipped under any other repo name.
+- The workflow builds, copies `dist/index.html` to `dist/404.html` (Pages has no rewrites, so this is the SPA fallback), and deploys `dist/` with `actions/deploy-pages`.
+
 ## Rules for Claude
 
 - Don't commit, push, or deploy unless asked.
